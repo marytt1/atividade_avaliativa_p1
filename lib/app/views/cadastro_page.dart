@@ -1,21 +1,26 @@
 import 'package:flutter/material.dart';
-import '../viewmodels/login_viewmodel.dart';
-import 'cadastro_page.dart';
+import '../viewmodels/cadastro_viewmodel.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class CadastroPage extends StatefulWidget {
+  const CadastroPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<CadastroPage> createState() => _CadastroPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
-  final LoginViewModel _viewModel = LoginViewModel();
+class _CadastroPageState extends State<CadastroPage> {
+  final CadastroViewModel _viewModel = CadastroViewModel();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(177, 0, 0, 0),
+      
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        iconTheme: const IconThemeData(color: Colors.white), 
+      ),
       
       body: Center(
         child: SingleChildScrollView(
@@ -27,8 +32,40 @@ class _LoginPageState extends State<LoginPage> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 
-                const Icon(Icons.theaters, size: 80, color: Color.fromARGB(255, 191, 64, 191)),
+                const Icon(Icons.account_box_rounded, size: 80, color: Color.fromARGB(255, 191, 64, 191)),
+                const SizedBox(height: 16),
+                
+                const Text(
+                  'Criar Conta',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
                 const SizedBox(height: 40),
+
+                // CAMPO DE NOME
+                TextFormField(
+                  controller: _viewModel.nomeController,
+                  validator: _viewModel.nomeValidator,
+                  style: const TextStyle(color: Colors.white),
+                  decoration: InputDecoration(
+                    labelText: 'Nome Completo',
+                    labelStyle: const TextStyle(color: Colors.white70),
+                    prefixIcon: const Icon(Icons.person, color: Color.fromARGB(255, 191, 64, 191)),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(color: Colors.white30),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(color: Color.fromARGB(255, 191, 64, 191), width: 2),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
 
                 // CAMPO DE E-MAIL
                 TextFormField(
@@ -86,9 +123,9 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const SizedBox(height: 32),
 
-                // BOTÃO ENTRAR
+                // BOTÃO CADASTRAR
                 ElevatedButton(
-                  onPressed: () => _viewModel.entrar(context),
+                  onPressed: () => _viewModel.cadastrar(context),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color.fromARGB(255, 191, 64, 191),
                     padding: const EdgeInsets.symmetric(vertical: 16),
@@ -97,23 +134,8 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   child: const Text(
-                    'ENTRAR',
+                    'CADASTRAR',
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
-                  ),
-                ),
-                const SizedBox(height: 16),
-
-                // BOTÃO DE IR PARA CADASTRO
-                TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const CadastroPage()),
-                    );
-                  },
-                  child: const Text(
-                    'Ainda não tem conta? Cadastre-se',
-                    style: TextStyle(color: Colors.white70, decoration: TextDecoration.underline),
                   ),
                 ),
               ],

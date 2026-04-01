@@ -13,7 +13,7 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     super.initState();
     
-    // função que conta 3 segundos.
+    // conta 3 segundos.
     _viewModel.carregarEIrParaLogin(context);
   }
 
