@@ -1,17 +1,11 @@
-# atividade_avaliativa_p1
+## Explicação Breve da Arquitetura Adotada
 
-A new Flutter project.
+O projeto foi estruturado nas seguintes camadas principais:
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+* **Views:** Responsáveis exclusivamente pela interface visual e interação com o usuário. Foram construídas utilizando `StatelessWidget` e `StatefulWidget` (ex: `HomePage`, `LoginPage`, `CadastroPage`).
+  
+* **ViewModels:** Responsáveis pela regra de negócio, controle de estado das telas e validação dos formulários. Elas interagem com a interface utilizando o padrão `ChangeNotifier` (ex: `LoginViewModel`, `CadastroViewModel`).
+  
+* **Models:** Definem a estrutura dos dados utilizados no aplicativo. O `UsuarioModel`, determina que cada usuário deve possuir um nome, e-mail e senha.
+  
+* **Data:** Camada que gerencia o banco de dados temporário. O `UsuarioMockStore` utiliza uma lista em memória e métodos estáticos para armazenar, ler e validar os usuários cadastrados enquanto o aplicativo está em execução.
